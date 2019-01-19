@@ -1,2 +1,2 @@
-# vsts-pipeline-templates
-CI and CD pipeline templates for VSTS
+# Azure Pipeline Templates
+CI and CD pipeline templates for Azure Pipelines
