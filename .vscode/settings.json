@@ -1,0 +1,41 @@
+{
+    "files.exclude": {
+      "**/.pytest_cache": true,
+      "**/__pycache__": true,
+      ".testresults": true,
+    },
+    "cSpell.enabled": true,
+    "cSpell.ignorePaths": [
+      "**/__pycache__/",
+      "**/.pytest_cache/",
+      "**/.testresults/",
+      "**/requirements*.txt",
+      "**/.git/**",
+      ".vscode",
+  ],
+    "cSpell.enabledLanguageIds": [
+      "asciidoc",
+      "azure-pipelines",
+      "html",
+      "ini",
+      "json",
+      "markdown",
+      "plaintext",
+      "properties",
+      "python",
+      "restructuredtext",
+      "text",
+      "toml",
+      "yaml",
+      "yml"
+    ],
+    "cSpell.dictionaries": [
+      "companies",
+      "cpp",
+      "en_us",
+      "filetypes",
+      "python",
+      "misc",
+      "softwareTerms"
+    ],
+  }
