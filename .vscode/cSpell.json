@@ -1,13 +1,18 @@
 {
-    "version": "0.1",
-    "language": "en",
-    "words": [
-      "junit",
-      "pytest",
-      "swellaby",
-      "testpaths"
-    ],
-    "flagWords": [
+  "version": "0.1",
+  "language": "en",
+  "words": [
+    "filterwarnings",
+    "junit",
+    "pytest",
+    "pyyaml",
+    "rustup",
+    "setvariable",
+    "swellaby",
+    "testpaths",
+    "userprofile"
+  ],
+  "flagWords": [
 
-    ]
-  }
+  ]
+}
