@@ -1,0 +1,23 @@
+pr:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- script: pip install -r requirements.txt
+  displayName: 'Install Dependencies'
+
+- script: pytest --junitxml=.testresults/unit/junit.xml
+  displayName: 'Run Tests'
+
+- script: yamllint
+  displayName: 'Lint Templates'
+
+- task: PublishTestResults@2
+  displayName: 'Publish unit test results'
+  inputs:
+    testResultsFormat: JUnit
+    testResultsFiles: 'junit.xml'
+    searchFolder: $(Build.SourcesDirectory)/.testresults/unit
+    testRunTitle: 'azure-pipelines-templates::Unit Tests::Build $(Build.BuildId)'

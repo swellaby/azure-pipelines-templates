@@ -4,13 +4,17 @@
   "words": [
     "filterwarnings",
     "junit",
+    "junitxml",
+    "pycodestyle",
     "pytest",
     "pyyaml",
     "rustup",
     "setvariable",
     "swellaby",
     "testpaths",
-    "userprofile"
+    "testresults",
+    "userprofile",
+    "yamllint"
   ],
   "flagWords": [
 
