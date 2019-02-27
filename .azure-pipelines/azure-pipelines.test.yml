@@ -19,9 +19,6 @@ steps:
 - script: pytest --junitxml=.testresults/unit/junit.xml
   displayName: 'Run tests'
 
-- script: yamllint
-  displayName: 'Lint templates'
-
 - task: PublishTestResults@2
   displayName: 'Publish unit test results'
   inputs:
