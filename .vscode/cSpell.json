@@ -9,6 +9,7 @@
     "pytest",
     "pyyaml",
     "rustup",
+    "setuptools",
     "setvariable",
     "swellaby",
     "testpaths",

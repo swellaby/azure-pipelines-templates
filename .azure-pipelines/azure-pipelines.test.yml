@@ -5,14 +5,17 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
+- script: python -m pip install --upgrade pip setuptools wheel
+  displayName: 'Install tools'
+
 - script: pip install -r requirements.txt
-  displayName: 'Install Dependencies'
+  displayName: 'Install dependencies'
 
 - script: pytest --junitxml=.testresults/unit/junit.xml
-  displayName: 'Run Tests'
+  displayName: 'Run tests'
 
 - script: yamllint
-  displayName: 'Lint Templates'
+  displayName: 'Lint templates'
 
 - task: PublishTestResults@2
   displayName: 'Publish unit test results'
