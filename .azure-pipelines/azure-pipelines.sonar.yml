@@ -28,6 +28,13 @@ steps:
 - script: pytest --junitxml=.testresults/unit/junit.xml
   displayName: 'Run tests'
 
+- task: 1ESLighthouseEng.PipelineArtifactCaching.RestoreAndSaveCacheV1.RestoreAndSaveCache@1
+  displayName: 'Restore and save artifact based on: sonar-project.properties'
+  inputs:
+    keyfile: 'sonar-project.properties'
+    targetfolder: /home/vsts/.sonar/cache
+    vstsFeed: '72555fb5-9a3a-4f5e-ae8a-d79a1ba25431'
+
 - task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
   displayName: 'Run code analysis'
 
