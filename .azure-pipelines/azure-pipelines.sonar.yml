@@ -20,7 +20,8 @@ steps:
     organization: swellaby
     scannerMode: CLI
     extraProperties: |
-     sonar.projectVersion=$(Build.BuildId)
+      sonar.projectVersion=$(Build.BuildId)
+
 
 - script: pip install -r requirements.txt
   displayName: 'Install dependencies'
@@ -42,7 +43,7 @@ steps:
   inputs:
     keyfile: 'sonar-project.properties'
     targetfolder: '/home/vsts/.sonar/cache'
-    vstsFeed: '2555fb5-9a3a-4f5e-ae8a-d79a1ba25431'
+    vstsFeed: '72555fb5-9a3a-4f5e-ae8a-d79a1ba25431'
 
 - task: SonarSource.sonarcloud.38b27399-a642-40af-bb7d-9971f69712e8.SonarCloudPublish@1
   displayName: 'Publish quality gate result'
