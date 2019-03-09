@@ -5,11 +5,14 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
+- script: python -m pip install --upgrade pip setuptools wheel
+  displayName: 'Install tools'
+
 - script: pip install -r requirements.txt
-  displayName: 'Install Dependencies'
+  displayName: 'Install dependencies'
 
 - script: pycodestyle .
-  displayName: 'Lint Python'
+  displayName: 'Lint python'
 
 - script: yamllint .
-  displayName: 'Lint Templates'
+  displayName: 'Lint templates'
