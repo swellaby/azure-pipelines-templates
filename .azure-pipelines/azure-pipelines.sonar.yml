@@ -1,0 +1,36 @@
+pr:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.7'
+    architecture: 'x64'
+
+- script: python -m pip install --upgrade pip setuptools wheel
+  displayName: 'Install tools'
+
+- task: SonarSource.sonarcloud.14d9cde6-c1da-4d55-aa01-2965cd301255.SonarCloudPrepare@1
+  displayName: 'Prepare analysis on SonarCloud'
+  inputs:
+    SonarCloud: 'SonarCloud Swellaby'
+    organization: swellaby
+    scannerMode: CLI
+    extraProperties: |
+     sonar.projectVersion=$(Build.BuildId)
+
+- script: pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- script: pytest --junitxml=.testresults/unit/junit.xml
+  displayName: 'Run tests'
+
+- task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
+  displayName: 'Run code analysis'
+
+- task: SonarSource.sonarcloud.38b27399-a642-40af-bb7d-9971f69712e8.SonarCloudPublish@1
+  displayName: 'Publish quality gate result'
+
