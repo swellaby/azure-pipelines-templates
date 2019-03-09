@@ -21,6 +21,7 @@ steps:
     scannerMode: CLI
     extraProperties: |
       sonar.projectVersion=$(Build.BuildId)
+      sonar.userHome=$(Build.SourcesDirectory)/sonar/.cache/
 
 
 - script: pip install -r requirements.txt
@@ -33,7 +34,7 @@ steps:
   displayName: 'Restore cached plugins'
   inputs:
     keyfile: 'sonar-project.properties'
-    targetfolder: '/home/vsts/.sonar/cache'
+    targetfolder: '$(Build.SourcesDirectory)/sonar/.cache/'
     vstsFeed: '72555fb5-9a3a-4f5e-ae8a-d79a1ba25431'
 
 - task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
@@ -42,7 +43,7 @@ steps:
 - task: 1ESLighthouseEng.PipelineArtifactCaching.SaveCacheV1.SaveCache@1
   inputs:
     keyfile: 'sonar-project.properties'
-    targetfolder: '/home/vsts/.sonar/cache'
+    targetfolder: '$(Build.SourcesDirectory)/sonar/.cache/'
     vstsFeed: '72555fb5-9a3a-4f5e-ae8a-d79a1ba25431'
 
 - task: SonarSource.sonarcloud.38b27399-a642-40af-bb7d-9971f69712e8.SonarCloudPublish@1
