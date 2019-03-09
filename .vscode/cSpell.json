@@ -15,6 +15,7 @@
     "testpaths",
     "testresults",
     "userprofile",
+    "xunit",
     "yamllint"
   ],
   "flagWords": [
