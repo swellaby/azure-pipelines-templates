@@ -1,11 +1,21 @@
 parameters:
+  setVersion:
+    versionSpec: '3.7'
+    architecture: 'x64'
+    taskDisplayName: 'Set python version'
   pipInstall:
     requirementsFile: requirements.txt
     taskDisplayName: 'Install dependencies'
 
 steps:
 - template: '../set-version.yml'
+  parameters:
+    versionSpec: '${{ parameters.setVersion.versionSpec }}'
+    architecture: '${{ parameters.setVersion.architecture }}'
+    taskDisplayName: '${{ parameters.setVersion.taskDisplayName }}'
+
 - template: '../update-tools.yml'
+
 - template: '../pip-install-dependencies.yml'
   parameters:
     requirementsFile: '${{ parameters.pipInstall.requirementsFile }}'
