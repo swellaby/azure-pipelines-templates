@@ -1,0 +1,12 @@
+parameters:
+  pipInstall:
+    requirementsFile: requirements.txt
+    taskDisplayName: 'Install dependencies'
+
+steps:
+- template: '../set-version.yml'
+- template: '../update-tools.yml'
+- template: '../pip-install-dependencies.yml'
+  parameters:
+    requirementsFile: '${{ parameters.pipInstall.requirementsFile }}'
+    taskDisplayName: '${{ parameters.pipInstall.taskDisplayName }}'
