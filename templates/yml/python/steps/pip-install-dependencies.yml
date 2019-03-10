@@ -1,0 +1,7 @@
+parameters:
+  requirementsFile: requirements.txt
+  taskDisplayName: 'Install dependencies'
+
+steps:
+- script: pip install -r ${{ parameters.requirementsFile }}
+  displayName: '${{ parameters.taskDisplayName }}'
