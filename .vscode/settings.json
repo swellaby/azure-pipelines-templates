@@ -37,18 +37,8 @@
     "misc",
     "softwareTerms"
   ],
-  "vsicons.associations.files": [
-    {
-      "icon": "azurepipelines",
-      "extensions": [
-        "azure-pipelines.test.yml",
-        "azure-pipelines.lint.yml"
-      ],
-      "filename": true,
-      "format": "svg"
-    }
-  ],
   "files.associations": {
-    "*azure-pipelines*": "azure-pipelines"
+    "**/.azure-pipelines/**": "azure-pipelines",
+    "**/templates/**/*.yml": "azure-pipelines"
   }
 }
