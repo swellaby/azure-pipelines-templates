@@ -8,8 +8,9 @@ steps:
 - template: '../templates/yml/python/steps/combo/setup-pip.yml'
 - template: '../templates/yml/python/steps/combo/run-unit-tests.yml'
   parameters:
-    additionalArgs: '--junitxml=.testresults/unit/junit.xml'
-    taskDisplayName: 'Run unit tests'
+    test:
+      additionalArgs: '--junitxml=.testresults/unit/junit.xml'
+      taskDisplayName: 'Run unit tests'
 
 
 # - script: pytest --junitxml=.testresults/unit/junit.xml
