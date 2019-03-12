@@ -5,17 +5,5 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- template: '../templates/yml/python/steps/combo/setup-pip.yml'
-- template: '../templates/yml/python/steps/combo/run-pytest-ci.yml'
-
-
-# - script: pytest --junitxml=.testresults/unit/junit.xml
-#   displayName: 'Run tests'
-
-# - task: PublishTestResults@2
-#   displayName: 'Publish unit test results'
-#   inputs:
-#     testResultsFormat: JUnit
-#     testResultsFiles: 'junit.xml'
-#     searchFolder: $(Build.SourcesDirectory)/.testresults/unit
-#     testRunTitle: 'azure-pipelines-templates::Unit Tests::Build $(Build.BuildId)'
+- template: '../templates/yml/python/combo/setup-pip.yml'
+- template: '../templates/yml/python/combo/run-pytest-ci.yml'

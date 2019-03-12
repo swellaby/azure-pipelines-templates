@@ -10,13 +10,13 @@ parameters:
     testRunTitle: 'Unit Tests::Build $(Build.BuildId)'
 
 steps:
-- template: '../test.yml'
+- template: 'steps/test.yml'
   parameters:
     testRunner: 'pytest'
     additionalArgs: '${{ parameters.test.additionalArgs }}'
     taskDisplayName: '${{ parameters.test.taskDisplayName }}'
 
-- template: '../../../any/publish-test-results.yml'
+- template: '../../any/publish-test-results.yml'
   parameters:
     taskDisplayName: '${{ parameters.publishTestResults.taskDisplayName }}'
     testResultsFormat: '${{ parameters.publishTestResults.testResultsFormat }}'

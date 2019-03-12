@@ -5,8 +5,8 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- template: '../templates/yml/python/steps/combo/setup-pip.yml'
-- template: '../templates/yml/python/steps/combo/run-pytest-ci.yml'
+- template: '../templates/yml/python/combo/setup-pip.yml'
+- template: '../templates/yml/python/combo/run-pytest-ci.yml'
 
 - task: SonarSource.sonarcloud.14d9cde6-c1da-4d55-aa01-2965cd301255.SonarCloudPrepare@1
   displayName: 'Prepare analysis on SonarCloud'
@@ -16,26 +16,9 @@ steps:
     scannerMode: CLI
     extraProperties: |
       sonar.projectVersion=$(Build.BuildId)
-      sonar.userHome=$(Build.SourcesDirectory)/sonar
-
-# - script: pytest --junitxml=.testresults/unit/junit.xml
-#   displayName: 'Run tests'
-
-- task: 1ESLighthouseEng.PipelineArtifactCaching.RestoreCacheV1.RestoreCache@1
-  displayName: 'Restore cached plugins'
-  inputs:
-    keyfile: 'sonar-project.properties'
-    targetfolder: '$(Build.SourcesDirectory)/sonar'
-    vstsFeed: '72555fb5-9a3a-4f5e-ae8a-d79a1ba25431'
 
 - task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
   displayName: 'Run code analysis'
-
-- task: 1ESLighthouseEng.PipelineArtifactCaching.SaveCacheV1.SaveCache@1
-  inputs:
-    keyfile: 'sonar-project.properties'
-    targetfolder: '$(Build.SourcesDirectory)/sonar'
-    vstsFeed: '72555fb5-9a3a-4f5e-ae8a-d79a1ba25431'
 
 - task: SonarSource.sonarcloud.38b27399-a642-40af-bb7d-9971f69712e8.SonarCloudPublish@1
   displayName: 'Publish quality gate result'
