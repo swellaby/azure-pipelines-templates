@@ -16,7 +16,7 @@ steps:
 
 - template: '../update-tools.yml'
 
-- template: '../pip-install-dependencies.yml'
+- template: '../pip-install.yml'
   parameters:
     requirementsFile: '${{ parameters.pipInstall.requirementsFile }}'
     taskDisplayName: '${{ parameters.pipInstall.taskDisplayName }}'

@@ -1,0 +1,9 @@
+parameters:
+  linter: 'pycodestyle'
+  target: '.'
+  additionalArgs: ''
+  taskDisplayName: 'Lint'
+
+steps:
+- script: '${{ parameters.linter }} ${{ parameters.target }} ${{ parameters.additionalArgs }}'
+  displayName: '${{ parameters.taskDisplayName }}'

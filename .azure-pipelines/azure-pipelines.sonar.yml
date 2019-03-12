@@ -5,7 +5,11 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- template: '../templates/yml/python/steps/combo/setup.yml'
+- template: '../templates/yml/python/steps/combo/setup-pip.yml'
+- template: '../templates/yml/python/steps/combo/run-unit-tests.yml'
+  parameters:
+    additionalArgs: '--junitxml=.testresults/unit/junit.xml'
+    taskDisplayName: 'Run unit tests'
 
 - task: SonarSource.sonarcloud.14d9cde6-c1da-4d55-aa01-2965cd301255.SonarCloudPrepare@1
   displayName: 'Prepare analysis on SonarCloud'
@@ -17,8 +21,8 @@ steps:
       sonar.projectVersion=$(Build.BuildId)
       sonar.userHome=$(Build.SourcesDirectory)/sonar
 
-- script: pytest --junitxml=.testresults/unit/junit.xml
-  displayName: 'Run tests'
+# - script: pytest --junitxml=.testresults/unit/junit.xml
+#   displayName: 'Run tests'
 
 - task: 1ESLighthouseEng.PipelineArtifactCaching.RestoreCacheV1.RestoreCache@1
   displayName: 'Restore cached plugins'

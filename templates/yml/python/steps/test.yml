@@ -1,0 +1,8 @@
+parameters:
+  testRunner: 'pytest'
+  additionalArgs: ''
+  taskDisplayName: 'Run tests'
+
+steps:
+- script: '${{ parameters.testRunner }} ${{ parameters.additionalArgs }}'
+  displayName: '${{ parameters.taskDisplayName }}'
