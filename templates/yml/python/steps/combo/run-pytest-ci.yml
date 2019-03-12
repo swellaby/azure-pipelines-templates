@@ -1,0 +1,25 @@
+parameters:
+  test:
+    additionalArgs: '--junitxml=.testresults/unit/junit.xml'
+    taskDisplayName: 'Run unit tests'
+  publishTestResults:
+    taskDisplayName: 'Publish unit test results'
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'junit.xml'
+    searchFolder: $(Build.SourcesDirectory)/.testresults/unit
+    testRunTitle: 'Unit Tests::Build $(Build.BuildId)'
+
+steps:
+- template: '../test.yml'
+  parameters:
+    testRunner: 'pytest'
+    additionalArgs: '${{ parameters.test.additionalArgs }}'
+    taskDisplayName: '${{ parameters.test.taskDisplayName }}'
+
+- template: '../../../any/publish-test-results.yml'
+  parameters:
+    taskDisplayName: '${{ parameters.publishTestResults.taskDisplayName }}'
+    testResultsFormat: '${{ parameters.publishTestResults.testResultsFormat }}'
+    testResultsFiles: '${{ parameters.publishTestResults.testResultsFiles }}'
+    searchFolder: '${{ parameters.publishTestResults.searchFolder }}'
+    testRunTitle: '${{ parameters.publishTestResults.testRunTitle }}'
