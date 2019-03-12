@@ -2,6 +2,7 @@
   "recommendations": [
     "swellaby.common-pack",
     "ms-python.python",
+    "VisualStudioExptTeam.vscodeintellicode",
     "LittleFoxTeam.vscode-python-test-adapter",
     "hbenl.vscode-test-explorer",
     "ms-azure-devops.azure-pipelines"
