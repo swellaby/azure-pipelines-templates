@@ -1,0 +1,15 @@
+parameters:
+  taskDisplayName: 'Publish unit test results'
+  testResultsFormat: 'JUnit'
+  testResultsFiles: 'junit.xml'
+  searchFolder: $(Build.SourcesDirectory)/.testresults/unit
+  testRunTitle: 'Unit Tests::Build $(Build.BuildId)'
+
+steps:
+- task: PublishTestResults@2
+  displayName: ${{ parameters.taskDisplayName }}
+  inputs:
+    testResultsFormat: ${{ parameters.testResultsFormat }}
+    testResultsFiles: ${{ parameters.testResultsFiles }}
+    searchFolder: ${{ parameters.searchFolder }}
+    testRunTitle: ${{ parameters.testRunTitle }}
