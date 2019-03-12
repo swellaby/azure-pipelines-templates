@@ -1,6 +1,6 @@
-from test.test_utilities import parse_template_yaml_file
+from test.test_utilities import parse_rust_step_template_yaml_file
 
-contents = parse_template_yaml_file("rust/steps/install-rust-unix.yml")
+contents = parse_rust_step_template_yaml_file("install-rust-unix.yml")
 steps = contents["steps"]
 first = steps[0]
 
