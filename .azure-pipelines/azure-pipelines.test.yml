@@ -9,6 +9,7 @@ steps:
 - template: '../templates/yml/python/steps/combo/run-unit-tests.yml'
   parameters:
     test:
+      testRunner:
       additionalArgs: '--junitxml=.testresults/unit/junit.xml'
       taskDisplayName: 'Run unit tests'
 
