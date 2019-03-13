@@ -6,7 +6,7 @@ pool:
 
 steps:
 - template: '../templates/yml/python/combo/setup-pip.yml'
-- template: '../templates/yml/python/step/pycodestyle.yml'
+- template: '../templates/yml/python/steps/pycodestyle.yml'
   parameters:
     target: ''
     taskDisplayName: 'Lint python'
