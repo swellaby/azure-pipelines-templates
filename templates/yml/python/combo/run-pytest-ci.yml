@@ -10,9 +10,8 @@ parameters:
     testRunTitle: 'Unit Tests::Build $(Build.BuildId)'
 
 steps:
-- template: '../steps/test.yml'
+- template: '../steps/pytest.yml'
   parameters:
-    testRunner: 'pytest'
     additionalArgs: '${{ parameters.test.additionalArgs }}'
     taskDisplayName: '${{ parameters.test.taskDisplayName }}'
 
