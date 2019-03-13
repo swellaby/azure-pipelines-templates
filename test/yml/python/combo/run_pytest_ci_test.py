@@ -12,45 +12,80 @@ publishTestResultsStepParameters = publishTestResultsStep["parameters"]
 
 
 def test_test_step_additional_args_parameter_default():
-    assert (
-        testParameters["additionalArgs"]
-        == "--junitxml=.testresults/unit/junit.xml"
-    )
+    value = testParameters["additionalArgs"]
+    assert value == "--junitxml=.testresults/unit/junit.xml"
 
 
 def test_test_step_task_display_name_parameter_default():
     assert testParameters["taskDisplayName"] == "Run unit tests"
 
 
-# def test_architecture_parameter_default():
-#     assert parameters["architecture"] == "x64"
+def test_publish_step_results_format_parameter_default():
+    assert publishTestResultsParameters["testResultsFormat"] == "JUnit"
 
 
-# def test_task__display_name_parameter_default():
-#     assert parameters["taskDisplayName"] == "Set python version"
+def test_publish_step_results_files_parameter_default():
+    assert publishTestResultsParameters["testResultsFiles"] == "junit.xml"
 
 
-# def test_num_steps():
-#     assert len(steps) == 1
+def test_publish_step_search_folder_parameter_default():
+    value = publishTestResultsParameters["searchFolder"]
+    assert value == "$(Build.SourcesDirectory)/.testresults/unit"
 
 
-# def test_step_type():
-#     assert usePythonVersionStep["task"] == "UsePythonVersion@0"
+def test_publish_step_run_title_parameter_default():
+    value = publishTestResultsParameters["testRunTitle"]
+    assert value == "Unit Tests::Build $(Build.BuildId)"
 
 
-# def test_step_display_name():
-#     assert usePythonVersionStep["displayName"] == (
-#         "${{ parameters.taskDisplayName }}"
-#     )
+def test_publish_step_task_display_name_parameter_default():
+    value = publishTestResultsParameters["taskDisplayName"]
+    assert value == "Publish unit test results"
 
 
-# def test_step_version_spec_input():
-#     assert usePythonVersionInputs["versionSpec"] == (
-#         "${{ parameters.versionSpec }}"
-#     )
+def test_num_steps():
+    assert len(steps) == 2
 
 
-# def test_step_architecture_input():
-#     assert usePythonVersionInputs["architecture"] == (
-#         "${{ parameters.architecture }}"
-#     )
+def test_pytest_step_template_path():
+    assert testStep["template"] == "../steps/pytest.yml"
+
+
+def test_pytest_step_additional_args_parameter():
+    value = testStepParameters["additionalArgs"]
+    assert value == "${{ parameters.test.additionalArgs }}"
+
+
+def test_pytest_step_display_name_parameter():
+    value = testStepParameters["taskDisplayName"]
+    assert value == "${{ parameters.test.taskDisplayName }}"
+
+
+def test_publish_step_template_path():
+    value = publishTestResultsStep["template"]
+    assert value == "../../any/publish-test-results.yml"
+
+
+def test_publish_step_test_results_format_parameter():
+    value = publishTestResultsStepParameters["testResultsFormat"]
+    assert value == "${{ parameters.publishTestResults.testResultsFormat }}"
+
+
+def test_publish_step_test_results_files_parameter():
+    value = publishTestResultsStepParameters["testResultsFiles"]
+    assert value == "${{ parameters.publishTestResults.testResultsFiles }}"
+
+
+def test_publish_step_search_folder_parameter():
+    value = publishTestResultsStepParameters["searchFolder"]
+    assert value == "${{ parameters.publishTestResults.searchFolder }}"
+
+
+def test_publish_step_test_run_title_parameter():
+    value = publishTestResultsStepParameters["testRunTitle"]
+    assert value == "${{ parameters.publishTestResults.testRunTitle }}"
+
+
+def test_publish_step_display_name_parameter():
+    value = publishTestResultsStepParameters["taskDisplayName"]
+    assert value == "${{ parameters.publishTestResults.taskDisplayName }}"

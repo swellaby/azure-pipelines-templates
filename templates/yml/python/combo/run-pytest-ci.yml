@@ -6,7 +6,7 @@ parameters:
     taskDisplayName: 'Publish unit test results'
     testResultsFormat: 'JUnit'
     testResultsFiles: 'junit.xml'
-    searchFolder: $(Build.SourcesDirectory)/.testresults/unit
+    searchFolder: '$(Build.SourcesDirectory)/.testresults/unit'
     testRunTitle: 'Unit Tests::Build $(Build.BuildId)'
 
 steps:
