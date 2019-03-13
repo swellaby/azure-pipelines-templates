@@ -10,7 +10,7 @@ def test_requirements_file_parameter_default():
     assert parameters["requirementsFile"] == "requirements.txt"
 
 
-def test_task__display_name_parameter_default():
+def test_task_display_name_parameter_default():
     assert parameters["taskDisplayName"] == "Install dependencies"
 
 

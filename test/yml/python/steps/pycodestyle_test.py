@@ -14,7 +14,7 @@ def test_additional_args_parameter_default():
     assert parameters["additionalArgs"] == ""
 
 
-def test_task__display_name_parameter_default():
+def test_task_display_name_parameter_default():
     assert parameters["taskDisplayName"] == "Lint"
 
 

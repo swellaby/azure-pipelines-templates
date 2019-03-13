@@ -15,7 +15,7 @@ def test_architecture_parameter_default():
     assert parameters["architecture"] == "x64"
 
 
-def test_task__display_name_parameter_default():
+def test_task_display_name_parameter_default():
     assert parameters["taskDisplayName"] == "Set python version"
 
 
