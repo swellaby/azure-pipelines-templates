@@ -1,0 +1,17 @@
+parameters:
+  taskDisplayName: 'Publish coverage results'
+  codeCoverageTool: 'Cobertura'
+  summaryFileLocation: '$(Build.SourcesDirectory)/.coverage/unit/cobertura-coverage.xml'
+  reportDirectory: '$(Build.SourcesDirectory)/.coverage/unit'
+  additionalCodeCoverageFiles: ''
+  failIfCoverageEmpty: false
+
+steps:
+- task: PublishCodeCoverageResults@1
+  displayName: ${{ parameters.taskDisplayName }}
+  inputs:
+    codeCoverageTool: '${{ parameters.codeCoverageTool }}'
+    summaryFileLocation: '${{ parameters.summaryFileLocation }}'
+    reportDirectory: '${{ parameters.reportDirectory }}'
+    additionalCodeCoverageFiles: '${{ parameters.additionalCodeCoverageFiles }}'
+    failIfCoverageEmpty: ${{ parameters.failIfCoverageEmpty }}
