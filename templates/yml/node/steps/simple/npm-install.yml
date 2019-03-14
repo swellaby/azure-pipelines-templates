@@ -1,0 +1,8 @@
+parameters:
+  taskDisplayName: 'Install dependencies'
+
+steps:
+- task: Npm@1
+  inputs:
+    command: install
+  displayName: '${{ parameters.taskDisplayName }}'

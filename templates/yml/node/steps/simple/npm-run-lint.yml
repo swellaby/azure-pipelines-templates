@@ -1,0 +1,10 @@
+parameters:
+  lintNpmScriptName: 'lint'
+  taskDisplayName: 'Lint'
+
+steps:
+- task: Npm@1
+  inputs:
+    command: custom
+    customCommand: 'run ${{ parameters.lintNpmScriptName }}'
+  displayName: '${{ parameters.taskDisplayName }}'
