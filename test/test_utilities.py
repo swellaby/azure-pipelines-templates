@@ -34,6 +34,10 @@ def parse_node_simple_step_template_yaml_file(filepath):
     return parse_template_yaml_file(node_simple_steps_root, filepath)
 
 
+def parse_node_combo_template_yaml_file(filepath):
+    return parse_template_yaml_file(node_combo_root, filepath)
+
+
 def parse_python_combo_template_yaml_file(filepath):
     return parse_template_yaml_file(node_combo_root, filepath)
 
