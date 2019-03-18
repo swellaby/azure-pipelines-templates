@@ -1,0 +1,10 @@
+parameters:
+  buildNpmScriptName: 'build'
+  taskDisplayName: 'Run build script'
+
+steps:
+- task: Npm@1
+  inputs:
+    command: custom
+    customCommand: 'run ${{ parameters.buildNpmScriptName }}'
+  displayName: '${{ parameters.taskDisplayName }}'

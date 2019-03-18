@@ -1,0 +1,10 @@
+parameters:
+  testNpmScriptName: 'test'
+  taskDisplayName: 'Run tests'
+
+steps:
+- task: Npm@1
+  inputs:
+    command: custom
+    customCommand: 'run ${{ parameters.testNpmScriptName }}'
+  displayName: '${{ parameters.taskDisplayName }}'
