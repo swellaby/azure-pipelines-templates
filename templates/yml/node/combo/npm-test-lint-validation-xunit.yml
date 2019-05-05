@@ -1,0 +1,38 @@
+parameters:
+  npmInstall:
+    taskDisplayName: 'Install dependencies'
+  npmTestScript:
+    npmTestScriptName: 'test'
+    taskDisplayName: 'Run tests'
+  npmLintScript:
+    npmLintScriptName: 'lint'
+    taskDisplayName: 'Lint'
+  publishTestResults:
+    taskDisplayName: 'Publish unit test results'
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'xunit.xml'
+    searchFolder: '$(Build.SourcesDirectory)/.testresults/unit'
+    testRunTitle: 'Unit Tests::Build $(Build.BuildId)'
+
+steps:
+- template: '../steps/simple/npm-install.yml'
+  parameters:
+    taskDisplayName: '${{ parameters.npmInstall.taskDisplayName }}'
+
+- template: '../steps/simple/npm-run-test.yml'
+  parameters:
+    testNpmScriptName: '${{ parameters.npmTestScript.npmTestScriptName }}'
+    taskDisplayName: '${{ parameters.npmTestScript.taskDisplayName }}'
+
+- template: '../steps/simple/npm-run-lint.yml'
+  parameters:
+    lintNpmScriptName: '${{ parameters.npmLintScript.npmLintScriptName }}'
+    taskDisplayName: '${{ parameters.npmLintScript.taskDisplayName }}'
+
+- template: '../../any/publish-test-results.yml'
+  parameters:
+    taskDisplayName: '${{ parameters.publishTestResults.taskDisplayName }}'
+    testResultsFormat: '${{ parameters.publishTestResults.testResultsFormat }}'
+    testResultsFiles: '${{ parameters.publishTestResults.testResultsFiles }}'
+    searchFolder: '${{ parameters.publishTestResults.searchFolder }}'
+    testRunTitle: '${{ parameters.publishTestResults.testRunTitle }}'
