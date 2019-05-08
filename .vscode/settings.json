@@ -40,6 +40,6 @@
     "**/.azure-pipelines/**": "azure-pipelines",
     "**/templates/**/*.yml": "azure-pipelines"
   },
-  "python.unitTest.pyTestEnabled": true,
-  "python.unitTest.autoTestDiscoverOnSaveEnabled": false
+  "python.testing.pyTestEnabled": false,
+  "python.testing.autoTestDiscoverOnSaveEnabled": false
 }
