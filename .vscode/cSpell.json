@@ -2,6 +2,7 @@
   "version": "0.1",
   "language": "en",
   "words": [
+    "clippy",
     "cobertura",
     "filterwarnings",
     "junit",
@@ -9,6 +10,7 @@
     "pycodestyle",
     "pytest",
     "pyyaml",
+    "rustfmt",
     "rustup",
     "setuptools",
     "setvariable",
