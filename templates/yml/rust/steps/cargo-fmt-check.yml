@@ -1,0 +1,6 @@
+parameters:
+  taskDisplayName: 'rustfmt check'
+
+steps:
+- script: cargo fmt -- --check
+  displayName: '${{ parameters.taskDisplayName }}'
