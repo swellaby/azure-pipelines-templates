@@ -1,0 +1,7 @@
+parameters:
+  additionalArgs: ''
+  taskDisplayName: 'fetch dependencies'
+
+steps:
+- script: 'cargo fetch ${{ parameters.additionalArgs }}'
+  displayName: '${{ parameters.taskDisplayName }}'
