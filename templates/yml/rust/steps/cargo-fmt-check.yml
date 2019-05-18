@@ -1,0 +1,9 @@
+parameters:
+  taskDisplayName: 'rustfmt check'
+
+steps:
+- script: |
+    set -eo pipefail
+    rustup component add rustfmt
+    cargo fmt -- --check
+  displayName: '${{ parameters.taskDisplayName }}'

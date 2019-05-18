@@ -1,6 +1,6 @@
 from test.test_utilities import parse_rust_step_template_yaml_file
 
-contents = parse_rust_step_template_yaml_file("install-rust-unix.yml")
+contents = parse_rust_step_template_yaml_file("install-rust-windows.yml")
 parameters = contents["parameters"]
 steps = contents["steps"]
 step = steps[0]
@@ -15,13 +15,14 @@ def test_num_steps():
 
 
 def test_script_contents():
-    assert step["script"] == (
-        "set -eo pipefail\n"
-        "curl https://sh.rustup.rs -sSf | sh -s -- -y\n"
+    assert step["powershell"] == (
+        "Invoke-WebRequest -Uri 'https://win.rustup.rs' "
+        "-Method 'GET' -OutFile .\\rustup-init.exe\n"
+        ".\\rustup-init.exe -y\n"
         "echo \"##vso[task.setvariable variable=PATH;]"
-        "$PATH:$HOME/.cargo/bin\"\n"
+        "$env:PATH;$env:USERPROFILE\\.cargo\\bin\"\n"
         "echo \"##vso[task.setvariable variable=cargoBinPath;]"
-        "$HOME/.cargo/bin\"\n"
+        "$env:USERPROFILE\\.cargo\\bin\"\n"
     )
 
 

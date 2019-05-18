@@ -1,13 +1,13 @@
 from test.test_utilities import parse_rust_step_template_yaml_file
 
-contents = parse_rust_step_template_yaml_file("install-rust-unix.yml")
+contents = parse_rust_step_template_yaml_file("cargo-clippy.yml")
 parameters = contents["parameters"]
 steps = contents["steps"]
 step = steps[0]
 
 
 def test_display_name_parameter_default():
-    assert parameters["taskDisplayName"] == "Install Rust"
+    assert parameters["taskDisplayName"] == "clippy"
 
 
 def test_num_steps():
@@ -17,11 +17,8 @@ def test_num_steps():
 def test_script_contents():
     assert step["script"] == (
         "set -eo pipefail\n"
-        "curl https://sh.rustup.rs -sSf | sh -s -- -y\n"
-        "echo \"##vso[task.setvariable variable=PATH;]"
-        "$PATH:$HOME/.cargo/bin\"\n"
-        "echo \"##vso[task.setvariable variable=cargoBinPath;]"
-        "$HOME/.cargo/bin\"\n"
+        "rustup component add clippy\n"
+        "cargo clippy ${{ parameters.additionalArgs }}\n"
     )
 
 

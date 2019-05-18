@@ -1,0 +1,10 @@
+parameters:
+  additionalArgs: ''
+  taskDisplayName: 'clippy'
+
+steps:
+- script: |
+    set -eo pipefail
+    rustup component add clippy
+    cargo clippy ${{ parameters.additionalArgs }}
+  displayName: '${{ parameters.taskDisplayName }}'

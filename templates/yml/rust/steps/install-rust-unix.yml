@@ -1,6 +1,10 @@
+parameters:
+  taskDisplayName: 'Install Rust'
+
 steps:
 - script: |
+    set -eo pipefail
     curl https://sh.rustup.rs -sSf | sh -s -- -y
     echo "##vso[task.setvariable variable=PATH;]$PATH:$HOME/.cargo/bin"
     echo "##vso[task.setvariable variable=cargoBinPath;]$HOME/.cargo/bin"
-  displayName: 'Install Rust'
+  displayName: '${{ parameters.taskDisplayName }}'

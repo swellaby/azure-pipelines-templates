@@ -1,0 +1,7 @@
+parameters:
+  additionalArgs: ''
+  taskDisplayName: 'build'
+
+steps:
+- script: 'cargo build ${{ parameters.additionalArgs }}'
+  displayName: '${{ parameters.taskDisplayName }}'
