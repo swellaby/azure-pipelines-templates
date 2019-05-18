@@ -1,0 +1,9 @@
+parameters:
+  additionalArgs: ''
+  taskDisplayName: 'test'
+
+steps:
+- script: |
+    set -eo pipefail
+    cargo test ${{ parameters.additionalArgs }}
+  displayName: '${{ parameters.taskDisplayName }}'
