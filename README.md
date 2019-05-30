@@ -6,6 +6,7 @@ Build and Release templates for Azure Pipelines
 [![License Badge][license-badge]][license-url]
 
 
+
 [license-url]: ./LICENSE
 [license-badge]: https://img.shields.io/github/license/swellaby/azure-pipelines-templates.svg?style=flat-square&color=blue
 [ci-badge]: https://img.shields.io/azure-devops/build/swellaby/opensource/64/master.svg?style=flat-square
