@@ -1,5 +1,5 @@
 parameters:
-  taskDisplayName: 'Publish coverage results'
+  taskDisplayName: 'Download pipeline artifact'
   project: 'OpenSource'
   pipeline: ''
   specificBuildWithTriggering: false
