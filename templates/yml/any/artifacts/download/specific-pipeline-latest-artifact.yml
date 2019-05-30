@@ -1,0 +1,24 @@
+parameters:
+  taskDisplayName: 'Publish coverage results'
+  project: 'OpenSource'
+  pipeline: ''
+  specificBuildWithTriggering: false
+  artifactName: ''
+  branchName: ''
+  itemPattern: ''
+  tags: ''
+  targetPath: ''
+
+steps:
+- task: DownloadPipelineArtifact@1
+  displayName: ${{ parameters.taskDisplayName }}
+  inputs:
+    buildType: specific
+    project: '${{ parameters.project }}'
+    pipeline: ${{ parameters.pipeline }}
+    specificBuildWithTriggering: ${{ parameters.specificBuildWithTriggering }}
+    artifactName: '${{ parameters.artifactName }}'
+    branchName: '${{ parameters.branchName }}'
+    itemPattern: '${{ parameters.itemPattern }}'
+    tags: '${{ parameters.tags }}'
+    targetPath: '${{ parameters.targetPath }}'
