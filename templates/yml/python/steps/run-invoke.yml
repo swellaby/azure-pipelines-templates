@@ -1,0 +1,8 @@
+parameters:
+  invokeOptions: ''
+  tasksAndArguments: ''
+  taskDisplayName: 'Run Invoke'
+
+steps:
+- script: 'invoke ${{ parameters.invokeOptions }} ${{ parameters.tasksAndArguments }}'
+  displayName: '${{ parameters.taskDisplayName }}'
