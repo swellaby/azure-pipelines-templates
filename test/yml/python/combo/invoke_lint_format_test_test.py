@@ -1,6 +1,6 @@
 from test.test_utilities import parse_python_combo_template_yaml_file
 
-contents = parse_python_combo_template_yaml_file("invoke-lint-test-format.yml")
+contents = parse_python_combo_template_yaml_file("invoke-lint-format-test.yml")
 steps = contents["steps"]
 parameters = contents["parameters"]
 setupParameters = parameters["setup"]
@@ -14,6 +14,15 @@ pipInstallStepParameters = setupStepParameters["pipInstall"]
 
 lintStep = steps[1]
 lintStepParameters = lintStep["parameters"]
+
+formatStep = steps[2]
+formatStepParameters = formatStep["parameters"]
+
+testStep = steps[3]
+testStepParameters = testStep["parameters"]
+
+publishTestResultsStep = steps[4]
+publishTestResultsStepParameters = publishTestResultsStep["parameters"]
 
 
 def test_setup_set_version_version_spec_parameter_default():
@@ -37,7 +46,7 @@ def test_pip_install_task_display_name_parameter_default():
 
 
 def test_num_steps():
-    assert len(steps) == 2
+    assert len(steps) == 5
 
 
 def test_set_version_step_template_path():
@@ -68,8 +77,10 @@ def test_setup_pip_step_pip_install_display_name_parameter():
     value = pipInstallStepParameters["taskDisplayName"]
     assert value == "${{ parameters.setup.pipInstall.taskDisplayName }}"
 
+
 def test_lint_step_template_path():
     assert lintStep["template"] == "../steps/run-invoke.yml"
+
 
 def test_lint_step_invoke_options_parameter():
     value = lintStepParameters["invokeOptions"]
@@ -84,3 +95,71 @@ def test_lint_step_tasks_and_arguments_parameter():
 def test_lint_step_display_name_parameter():
     value = lintStepParameters["taskDisplayName"]
     assert value == "${{ parameters.lint.taskDisplayName }}"
+
+
+def test_format_step_template_path():
+    assert lintStep["template"] == "../steps/run-invoke.yml"
+
+
+def test_format_step_invoke_options_parameter():
+    value = formatStepParameters["invokeOptions"]
+    assert value == "${{ parameters.format.invokeOptions }}"
+
+
+def test_format_step_tasks_and_arguments_parameter():
+    value = formatStepParameters["tasksAndArguments"]
+    assert value == "${{ parameters.format.tasksAndArguments }}"
+
+
+def test_format_step_display_name_parameter():
+    value = formatStepParameters["taskDisplayName"]
+    assert value == "${{ parameters.format.taskDisplayName }}"
+
+
+def test_test_step_template_path():
+    assert testStep["template"] == "../steps/run-invoke.yml"
+
+
+def test_test_step_invoke_options_parameter():
+    value = testStepParameters["invokeOptions"]
+    assert value == "${{ parameters.test.invokeOptions }}"
+
+
+def test_test_step_tasks_and_arguments_parameter():
+    value = testStepParameters["tasksAndArguments"]
+    assert value == "${{ parameters.test.tasksAndArguments }}"
+
+
+def test_test_step_display_name_parameter():
+    value = testStepParameters["taskDisplayName"]
+    assert value == "${{ parameters.test.taskDisplayName }}"
+
+
+def test_publish_step_template_path():
+    value = publishTestResultsStep["template"]
+    assert value == "../../any/publish-test-results.yml"
+
+
+def test_publish_step_test_results_format_parameter():
+    value = publishTestResultsStepParameters["testResultsFormat"]
+    assert value == "${{ parameters.publishTestResults.testResultsFormat }}"
+
+
+def test_publish_step_test_results_files_parameter():
+    value = publishTestResultsStepParameters["testResultsFiles"]
+    assert value == "${{ parameters.publishTestResults.testResultsFiles }}"
+
+
+def test_publish_step_search_folder_parameter():
+    value = publishTestResultsStepParameters["searchFolder"]
+    assert value == "${{ parameters.publishTestResults.searchFolder }}"
+
+
+def test_publish_step_test_run_title_parameter():
+    value = publishTestResultsStepParameters["testRunTitle"]
+    assert value == "${{ parameters.publishTestResults.testRunTitle }}"
+
+
+def test_publish_step_display_name_parameter():
+    value = publishTestResultsStepParameters["taskDisplayName"]
+    assert value == "${{ parameters.publishTestResults.taskDisplayName }}"

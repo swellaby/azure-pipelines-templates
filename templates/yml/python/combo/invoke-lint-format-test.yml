@@ -1,0 +1,64 @@
+parameters:
+  setup:
+    setVersion:
+      versionSpec: '3.7'
+      architecture: 'x64'
+      taskDisplayName: 'Set python version'
+    pipInstall:
+      requirementsFile: requirements.txt
+      taskDisplayName: 'Install dependencies'
+  lint:
+    invokeOptions: ''
+    tasksAndArguments: 'lint'
+    taskDisplayName: 'Lint'
+  format:
+    invokeOptions: ''
+    tasksAndArguments: 'check-format'
+    taskDisplayName: 'Check format'
+  test:
+    invokeOptions: ''
+    tasksAndArguments: 'test'
+    taskDisplayName: 'Run tests'
+  publishTestResults:
+    taskDisplayName: 'Publish unit test results'
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'junit.xml'
+    searchFolder: '$(Build.SourcesDirectory)/.testresults/unit'
+    testRunTitle: 'Unit Tests::Build $(Build.BuildId)'
+
+steps:
+- template: './setup-pip.yml'
+  parameters:
+    setVersion:
+      versionSpec: '${{ parameters.setup.setVersion.versionSpec }}'
+      architecture: '${{ parameters.setup.setVersion.architecture }}'
+      taskDisplayName: '${{ parameters.setup.setVersion.taskDisplayName }}'
+    pipInstall:
+      requirementsFile: ${{ parameters.setup.pipInstall.requirementsFile }}
+      taskDisplayName: '${{ parameters.setup.pipInstall.taskDisplayName }}'
+
+- template: '../steps/run-invoke.yml'
+  parameters:
+    invokeOptions: '${{ parameters.lint.invokeOptions }}'
+    tasksAndArguments: '${{ parameters.lint.tasksAndArguments }}'
+    taskDisplayName: '${{ parameters.lint.taskDisplayName }}'
+
+- template: '../steps/run-invoke.yml'
+  parameters:
+    invokeOptions: '${{ parameters.format.invokeOptions }}'
+    tasksAndArguments: '${{ parameters.format.tasksAndArguments }}'
+    taskDisplayName: '${{ parameters.format.taskDisplayName }}'
+
+- template: '../steps/run-invoke.yml'
+  parameters:
+    invokeOptions: '${{ parameters.test.invokeOptions }}'
+    tasksAndArguments: '${{ parameters.test.tasksAndArguments }}'
+    taskDisplayName: '${{ parameters.test.taskDisplayName }}'
+
+- template: '../../any/publish-test-results.yml'
+  parameters:
+    taskDisplayName: '${{ parameters.publishTestResults.taskDisplayName }}'
+    testResultsFormat: '${{ parameters.publishTestResults.testResultsFormat }}'
+    testResultsFiles: '${{ parameters.publishTestResults.testResultsFiles }}'
+    searchFolder: '${{ parameters.publishTestResults.searchFolder }}'
+    testRunTitle: '${{ parameters.publishTestResults.testRunTitle }}'
