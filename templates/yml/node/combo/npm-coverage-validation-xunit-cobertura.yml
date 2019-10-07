@@ -1,0 +1,46 @@
+parameters:
+  npmInstall:
+    taskDisplayName: 'Install dependencies'
+  runNpmEnforceCoverageScript:
+    npmScriptName: 'coverage:enforce'
+    taskDisplayName: 'Run enforce coverage script'
+  publishTestResults:
+    taskDisplayName: 'Publish unit test results'
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'xunit.xml'
+    searchFolder: '$(Build.SourcesDirectory)/.testresults/unit'
+    testRunTitle: 'Unit Tests::Build $(Build.BuildId)'
+  publishCoverage:
+    taskDisplayName: 'Publish coverage results'
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/.coverage/unit/cobertura-coverage.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/.coverage/unit'
+    additionalCodeCoverageFiles: ''
+    failIfCoverageEmpty: false
+
+steps:
+- template: '../steps/simple/npm-install.yml'
+  parameters:
+    taskDisplayName: '${{ parameters.npmInstall.taskDisplayName }}'
+
+- template: '../steps/simple/npm-run-coverage-enforce.yml'
+  parameters:
+    npmScriptName: '${{ parameters.runNpmEnforceCoverageScript.npmScriptName }}'
+    taskDisplayName: '${{ parameters.runNpmEnforceCoverageScript.taskDisplayName }}'
+
+- template: '../../any/publish-test-results.yml'
+  parameters:
+    taskDisplayName: '${{ parameters.publishTestResults.taskDisplayName }}'
+    testResultsFormat: '${{ parameters.publishTestResults.testResultsFormat }}'
+    testResultsFiles: '${{ parameters.publishTestResults.testResultsFiles }}'
+    searchFolder: '${{ parameters.publishTestResults.searchFolder }}'
+    testRunTitle: '${{ parameters.publishTestResults.testRunTitle }}'
+
+- template: '../../any/publish-code-coverage.yml'
+  parameters:
+    taskDisplayName: '${{ parameters.publishCoverage.taskDisplayName }}'
+    codeCoverageTool: '${{ parameters.publishCoverage.codeCoverageTool }}'
+    summaryFileLocation: '${{ parameters.publishCoverage.summaryFileLocation }}'
+    reportDirectory: '${{ parameters.publishCoverage.reportDirectory }}'
+    additionalCodeCoverageFiles: '${{ parameters.publishCoverage.additionalCodeCoverageFiles }}'
+    failIfCoverageEmpty: ${{ parameters.publishCoverage.failIfCoverageEmpty }}

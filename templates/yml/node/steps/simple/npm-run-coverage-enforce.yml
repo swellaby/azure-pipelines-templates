@@ -1,0 +1,10 @@
+parameters:
+  npmScriptName: 'coverage:enforce'
+  taskDisplayName: 'Run enforce coverage script'
+
+steps:
+- task: Npm@1
+  inputs:
+    command: custom
+    customCommand: 'run ${{ parameters.npmScriptName }}'
+  displayName: '${{ parameters.taskDisplayName }}'
