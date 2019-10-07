@@ -1,23 +1,24 @@
 from test.test_utilities import parse_node_combo_template_yaml_file
 
-fileName = "npm-test-lint-validation-xunit-cobertura.yml"
+fileName = "npm-coverage-validation-xunit-cobertura.yml"
 contents = parse_node_combo_template_yaml_file(fileName)
 steps = contents["steps"]
 parameters = contents["parameters"]
 npmInstallParameters = parameters["npmInstall"]
-npmTestScriptParameters = parameters["npmTestScript"]
-npmLintScriptParameters = parameters["npmLintScript"]
+runNpmEnforceCoverageScriptParameters = parameters[
+    "runNpmEnforceCoverageScript"
+]
 publishTestResultsParameters = parameters["publishTestResults"]
 publishCoverageResultsParameters = parameters["publishCoverage"]
-validationStep = steps[0]
-validationStepParameters = validationStep["parameters"]
-npmInstallStepParameters = validationStepParameters["npmInstall"]
-npmTestScriptStepParameters = validationStepParameters["npmTestScript"]
-npmLintScriptStepParameters = validationStepParameters["npmLintScript"]
-publishTestResultsStepParameters = validationStepParameters[
-    "publishTestResults"
+npmInstallStep = steps[0]
+npmInstallStepParameters = npmInstallStep["parameters"]
+runNpmEnforceCoverageScriptStep = steps[1]
+runNpmEnforceCoverageScriptStepParameters = runNpmEnforceCoverageScriptStep[
+    "parameters"
 ]
-publishCodeCoverageStep = steps[1]
+publishTestResultsStep = steps[2]
+publishTestResultsStepParameters = publishTestResultsStep["parameters"]
+publishCodeCoverageStep = steps[3]
 publishCodeCoverageStepParameters = publishCodeCoverageStep["parameters"]
 
 
@@ -25,20 +26,14 @@ def test_npm_install_step_display_name_parameter_default():
     assert npmInstallParameters["taskDisplayName"] == "Install dependencies"
 
 
-def test_npm_test_script_step_script_name_name_parameter_default():
-    assert npmTestScriptParameters["npmTestScriptName"] == "test"
+def test_run_npm_enforce_coverage_script_step_script_name_parameter_default():
+    value = runNpmEnforceCoverageScriptParameters["npmScriptName"]
+    assert value == "coverage:enforce"
 
 
-def test_npm_test_script_step_display_name_parameter_default():
-    assert npmTestScriptParameters["taskDisplayName"] == "Run tests"
-
-
-def test_npm_lint_script_step_script_name_parameter_default():
-    assert npmLintScriptParameters["npmLintScriptName"] == "lint"
-
-
-def test_npm_lint_script_step_display_name_parameter_default():
-    assert npmLintScriptParameters["taskDisplayName"] == "Lint"
+def test_run_npm_enforce_coverage_script_step_display_name_parameter_default():
+    value = runNpmEnforceCoverageScriptParameters["taskDisplayName"]
+    assert value == "Run enforce coverage script"
 
 
 def test_publish_test_results_step_results_format_parameter_default():
@@ -94,7 +89,11 @@ def test_publish_code_coverage_step_task_display_name_parameter_default():
 
 
 def test_num_steps():
-    assert len(steps) == 2
+    assert len(steps) == 4
+
+
+def test_npm_install_step_template_path():
+    assert npmInstallStep["template"] == "../steps/simple/npm-install.yml"
 
 
 def test_npm_install_step_display_name_parameter():
@@ -102,24 +101,29 @@ def test_npm_install_step_display_name_parameter():
     assert value == "${{ parameters.npmInstall.taskDisplayName }}"
 
 
-def test_npm_test_script_step_script_name_parameter():
-    value = npmTestScriptStepParameters["npmTestScriptName"]
-    assert value == "${{ parameters.npmTestScript.npmTestScriptName }}"
+def test_npm_run_enforce_coverage_script_step_template_path():
+    value = runNpmEnforceCoverageScriptStep["template"]
+    assert value == "../steps/simple/npm-run-coverage-enforce.yml"
 
 
-def test_npm_test_step_display_name_parameter():
-    value = npmTestScriptStepParameters["taskDisplayName"]
-    assert value == "${{ parameters.npmTestScript.taskDisplayName }}"
+def test_npm_run_enforce_coverage_script_step_script_name_parameter():
+    value = runNpmEnforceCoverageScriptStepParameters["npmScriptName"]
+    assert (
+        value == "${{ parameters.runNpmEnforceCoverageScript.npmScriptName }}"
+    )
 
 
-def test_npm_lint_script_step_script_name_parameter():
-    value = npmLintScriptStepParameters["npmLintScriptName"]
-    assert value == "${{ parameters.npmLintScript.npmLintScriptName }}"
+def test_npm_run_enforce_coverage_script_step_display_name_parameter():
+    value = runNpmEnforceCoverageScriptStepParameters["taskDisplayName"]
+    assert (
+        value
+        == "${{ parameters.runNpmEnforceCoverageScript.taskDisplayName }}"
+    )
 
 
-def test_npm_lint_step_display_name_parameter():
-    value = npmLintScriptStepParameters["taskDisplayName"]
-    assert value == "${{ parameters.npmLintScript.taskDisplayName }}"
+def test_publish_step_template_path():
+    value = publishTestResultsStep["template"]
+    assert value == "../../any/publish-test-results.yml"
 
 
 def test_publish_step_test_results_format_parameter():
