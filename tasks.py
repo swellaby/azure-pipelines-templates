@@ -16,11 +16,6 @@ def check_format(c):
     return black(c, True)
 
 
-@task(aliases=["t"])
-def test(c):
-    return c.run("pytest")
-
-
 @task(aliases=["lp"])
 def lint_python(c):
     return c.run("pycodestyle .")
@@ -34,3 +29,8 @@ def lint_yaml(c):
 @task(aliases=["l"], pre=[lint_python, lint_yaml])
 def lint(c):
     pass
+
+
+@task(aliases=["t"])
+def test(c):
+    return c.run("pytest")
