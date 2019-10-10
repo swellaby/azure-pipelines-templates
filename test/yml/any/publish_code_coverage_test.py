@@ -55,11 +55,6 @@ def test_step_summary_file_location_input():
     assert inputs["summaryFileLocation"] == value
 
 
-def test_step_report_directory_input():
-    value = inputs["reportDirectory"]
-    assert value == "${{ parameters.reportDirectory }}"
-
-
 def test_step_additional_code_coverage_files_input():
     value = inputs["additionalCodeCoverageFiles"]
     assert value == "${{ parameters.additionalCodeCoverageFiles }}"

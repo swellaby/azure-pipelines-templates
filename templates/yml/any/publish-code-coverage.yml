@@ -12,6 +12,5 @@ steps:
   inputs:
     codeCoverageTool: '${{ parameters.codeCoverageTool }}'
     summaryFileLocation: '${{ parameters.summaryFileLocation }}'
-    reportDirectory: '${{ parameters.reportDirectory }}'
     additionalCodeCoverageFiles: '${{ parameters.additionalCodeCoverageFiles }}'
     failIfCoverageEmpty: ${{ parameters.failIfCoverageEmpty }}
