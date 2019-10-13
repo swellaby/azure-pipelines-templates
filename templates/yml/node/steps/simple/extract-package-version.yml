@@ -1,0 +1,11 @@
+parameters:
+  taskDisplayName: 'Install dependencies'
+  variableName: packageVersion
+  workingDirectory: ''
+
+steps:
+- script: |
+    export PACKAGE_VERSION=$(node -e "console.log(require('./package.json').version);")
+    echo "##vso[task.setvariable variable=${{ parameters.variableName }}]$PACKAGE_VERSION"
+  displayName: ${{ parameters.taskDisplayName }}
+  workingDirectory: ${{ parameters.workingDirectory }}
