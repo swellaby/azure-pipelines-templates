@@ -1,4 +1,5 @@
 from invoke import task
+from version import __version__
 
 
 def black(c, check):
@@ -34,3 +35,8 @@ def lint(c):
 @task(aliases=["t"])
 def test(c):
     return c.run("pytest")
+
+
+@task(aliases=["pv", "sv"])
+def print_version(c):
+    return print(__version__)
