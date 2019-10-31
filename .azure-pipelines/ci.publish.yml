@@ -1,0 +1,56 @@
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - templates/*
+
+pr: none
+
+pool:
+  vmImage: 'Ubuntu-18.04'
+
+variables:
+- group: swellbot-github
+
+steps:
+- template: '../templates/yml/python/combo/setup-pip.yml'
+- template: '../templates/yml/python/combo/run-pytest-ci.yml'
+- template: '../templates/yml/python/steps/pycodestyle.yml'
+
+- script: |
+    git checkout master
+    git config user.name $(githubUser)
+    git config user.email $(githubEmail)
+    bumpversion patch
+    export PACKAGE_VERSION=$(invoke print-version)
+    echo "##vso[task.setvariable variable=packageVersion]$PACKAGE_VERSION"
+  displayName: 'Bump version'
+
+- template: templates/yml/any/sonar/run-sonar-cloud-cli-analysis.yml@templates
+  parameters:
+    projectVersion: $(packageVersion)
+
+- script: |
+    git push https://$(githubPat)@github.com/swellaby/azure-pipelines-templates.git
+  displayName: 'Check-in bumped version files'
+
+- script: |
+    git push https://$(githubPat)@github.com/swellaby/azure-pipelines-templates.git v$(packageVersion)
+  displayName: 'Push tag'
+
+- task: GitHubRelease@1
+  displayName: 'Publish GitHub Release'
+  inputs:
+    gitHubConnection: 'GitHub Swellaby'
+    repositoryName: 'swellaby/azure-pipelines-templates'
+    target: master
+    tagSource: manual
+    title: 'v$(packageVersion)'
+    releaseNotesSource: inline
+    releaseNotesInline: |
+      Released from Azure Pipelines:
+
+      https://dev.azure.com/swellaby/OpenSource/_build/results?buildId=$(Build.BuildId)&view=results
+    isPreRelease: true
