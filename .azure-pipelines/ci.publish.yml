@@ -28,7 +28,7 @@ steps:
     echo "##vso[task.setvariable variable=packageVersion]$PACKAGE_VERSION"
   displayName: 'Bump version'
 
-- template: templates/yml/any/sonar/run-sonar-cloud-cli-analysis.yml@templates
+- template: ../templates/yml/any/sonar/run-sonar-cloud-cli-analysis.yml
   parameters:
     projectVersion: $(packageVersion)
 
