@@ -1,0 +1,20 @@
+steps:
+- template: './run-tests.yml'
+- template: '../../templates/yml/python/steps/pycodestyle.yml'
+
+- script: |
+    git checkout master
+    git config user.name $(githubUser)
+    git config user.email $(githubEmail)
+    bumpversion patch
+    export PACKAGE_VERSION=$(invoke print-version)
+    echo "##vso[task.setvariable variable=packageVersion]$PACKAGE_VERSION"
+  displayName: 'Bump version'
+
+- template: ../templates/yml/any/sonar/run-sonar-cloud-cli-analysis.yml
+  parameters:
+    projectVersion: $(packageVersion)
+
+- script: |
+    git push https://$(githubPat)@github.com/swellaby/azure-pipelines-templates.git
+  displayName: 'Check-in bumped version files'

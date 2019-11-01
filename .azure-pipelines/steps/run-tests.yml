@@ -1,0 +1,3 @@
+steps:
+- template: '../../templates/yml/python/combo/setup-pip.yml'
+- template: '../../templates/yml/python/combo/run-pytest-ci.yml'
