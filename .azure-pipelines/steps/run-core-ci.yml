@@ -1,6 +1,6 @@
 steps:
-- template: './run-tests.yml'
-- template: './run-lint.yml'
+- template: 'run-tests.yml'
+- template: 'run-lint.yml'
 
 - script: |
     git checkout master
@@ -11,7 +11,7 @@ steps:
     echo "##vso[task.setvariable variable=packageVersion]$PACKAGE_VERSION"
   displayName: 'Bump version'
 
-- template: ../templates/yml/any/sonar/run-sonar-cloud-cli-analysis.yml
+- template: ../../templates/yml/any/sonar/run-sonar-cloud-cli-analysis.yml
   parameters:
     projectVersion: $(packageVersion)
 
