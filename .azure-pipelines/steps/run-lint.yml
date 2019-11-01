@@ -1,0 +1,8 @@
+steps:
+- template: '../../templates/yml/python/steps/pycodestyle.yml'
+  parameters:
+    target: '.'
+    taskDisplayName: 'Lint python'
+
+- script: yamllint .
+  displayName: 'Lint templates'

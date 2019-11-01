@@ -1,6 +1,6 @@
 steps:
 - template: './run-tests.yml'
-- template: '../../templates/yml/python/steps/pycodestyle.yml'
+- template: './run-lint.yml'
 
 - script: |
     git checkout master
