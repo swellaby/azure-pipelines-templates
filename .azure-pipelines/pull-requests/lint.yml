@@ -9,4 +9,3 @@ pool:
 steps:
 - template: '../../templates/yml/python/combo/setup-pip.yml'
 - template: '../steps/run-lint.yml'
-

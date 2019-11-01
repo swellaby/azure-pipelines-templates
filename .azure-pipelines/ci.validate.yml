@@ -1,10 +1,10 @@
 trigger:
   branches:
     include:
-      - master
+    - master
   paths:
     exclude:
-      - templates/*
+    - templates/*
 
 pr: none
 
