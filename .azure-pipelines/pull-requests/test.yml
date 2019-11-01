@@ -1,0 +1,10 @@
+trigger: none
+
+pr:
+- master
+
+pool:
+  vmImage: 'Ubuntu-18.04'
+
+steps:
+- template: '../steps/run-tests.yml'
