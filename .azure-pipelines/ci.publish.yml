@@ -1,0 +1,38 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - templates/*
+
+pr: none
+
+pool:
+  vmImage: 'Ubuntu-18.04'
+
+variables:
+- group: swellbot-github
+  repoTarget: https://$(githubPat)@github.com/swellaby/azure-pipelines-templates.git
+
+steps:
+- template: 'steps/run-core-ci.yml'
+
+- script: |
+    git push $(repoTarget) v$(packageVersion)
+  displayName: 'Push tag'
+
+- task: GitHubRelease@1
+  displayName: 'Publish GitHub Release'
+  inputs:
+    gitHubConnection: 'GitHub Swellaby'
+    repositoryName: 'swellaby/azure-pipelines-templates'
+    target: master
+    tagSource: manual
+    title: 'v$(packageVersion)'
+    releaseNotesSource: inline
+    releaseNotesInline: |
+      Released from Azure Pipelines:
+
+      https://dev.azure.com/swellaby/OpenSource/_build/results?buildId=$(Build.BuildId)&view=results
+    isPreRelease: true

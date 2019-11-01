@@ -1,0 +1,11 @@
+trigger: none
+
+pr:
+- master
+
+pool:
+  vmImage: 'Ubuntu-18.04'
+
+steps:
+- template: '../../templates/yml/python/combo/setup-pip.yml'
+- template: '../steps/run-lint.yml'

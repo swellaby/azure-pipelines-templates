@@ -1,0 +1,18 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - templates/*
+
+pr: none
+
+pool:
+  vmImage: 'Ubuntu-18.04'
+
+variables:
+- group: swellbot-github
+
+steps:
+- template: 'steps/run-core-ci.yml'

@@ -1,0 +1,19 @@
+trigger: none
+
+pr:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- template: '../steps/run-tests.yml'
+
+- script: |
+    export PACKAGE_VERSION=$(invoke print-version)
+    echo "##vso[task.setvariable variable=packageVersion]$PACKAGE_VERSION"
+  displayName: 'Extract version'
+
+- template: ../../templates/yml/any/sonar/run-sonar-cloud-cli-analysis.yml
+  parameters:
+    projectVersion: $(packageVersion)
