@@ -13,12 +13,13 @@ pool:
 
 variables:
 - group: swellbot-github
+  repoTarget: https://$(githubPat)@github.com/swellaby/azure-pipelines-templates.git
 
 steps:
 - template: 'steps/run-core-ci.yml'
 
 - script: |
-    git push https://$(githubPat)@github.com/swellaby/azure-pipelines-templates.git v$(packageVersion)
+    git push $(repoTarget) v$(packageVersion)
   displayName: 'Push tag'
 
 - task: GitHubRelease@1
