@@ -19,10 +19,10 @@ def test_script_contents():
         "Invoke-WebRequest -Uri 'https://win.rustup.rs' "
         "-Method 'GET' -OutFile .\\rustup-init.exe\n"
         ".\\rustup-init.exe -y\n"
-        "echo \"##vso[task.setvariable variable=PATH;]"
-        "$env:PATH;$env:USERPROFILE\\.cargo\\bin\"\n"
-        "echo \"##vso[task.setvariable variable=cargoBinPath;]"
-        "$env:USERPROFILE\\.cargo\\bin\"\n"
+        'echo "##vso[task.setvariable variable=PATH;]'
+        '$env:PATH;$env:USERPROFILE\\.cargo\\bin"\n'
+        'echo "##vso[task.setvariable variable=cargoBinPath;]'
+        '$env:USERPROFILE\\.cargo\\bin"\n'
     )
 
 

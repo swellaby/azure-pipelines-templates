@@ -18,10 +18,10 @@ def test_script_contents():
     assert step["script"] == (
         "set -eo pipefail\n"
         "curl https://sh.rustup.rs -sSf | sh -s -- -y\n"
-        "echo \"##vso[task.setvariable variable=PATH;]"
-        "$PATH:$HOME/.cargo/bin\"\n"
-        "echo \"##vso[task.setvariable variable=cargoBinPath;]"
-        "$HOME/.cargo/bin\"\n"
+        'echo "##vso[task.setvariable variable=PATH;]'
+        '$PATH:$HOME/.cargo/bin"\n'
+        'echo "##vso[task.setvariable variable=cargoBinPath;]'
+        '$HOME/.cargo/bin"\n'
     )
 
 
