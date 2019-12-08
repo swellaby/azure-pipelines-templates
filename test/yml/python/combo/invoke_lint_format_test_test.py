@@ -24,6 +24,8 @@ testStepParameters = testStep["parameters"]
 publishTestResultsStep = steps[4]
 publishTestResultsStepParameters = publishTestResultsStep["parameters"]
 
+runInvokeStepTemplatePath = "../steps/run-invoke.yml"
+
 
 def test_setup_set_version_version_spec_parameter_default():
     assert setVersionParameters["versionSpec"] == "3.7"
@@ -79,7 +81,7 @@ def test_setup_pip_step_pip_install_display_name_parameter():
 
 
 def test_lint_step_template_path():
-    assert lintStep["template"] == "../steps/run-invoke.yml"
+    assert lintStep["template"] == runInvokeStepTemplatePath
 
 
 def test_lint_step_invoke_options_parameter():
@@ -98,7 +100,7 @@ def test_lint_step_display_name_parameter():
 
 
 def test_format_step_template_path():
-    assert lintStep["template"] == "../steps/run-invoke.yml"
+    assert lintStep["template"] == runInvokeStepTemplatePath
 
 
 def test_format_step_invoke_options_parameter():
@@ -117,7 +119,7 @@ def test_format_step_display_name_parameter():
 
 
 def test_test_step_template_path():
-    assert testStep["template"] == "../steps/run-invoke.yml"
+    assert testStep["template"] == runInvokeStepTemplatePath
 
 
 def test_test_step_invoke_options_parameter():
