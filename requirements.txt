@@ -1,4 +1,4 @@
-pytest==5.4.2
+pytest==5.4.3
 pyyaml==5.3.1
 yamllint==1.23.0
 pycodestyle==2.6.0
